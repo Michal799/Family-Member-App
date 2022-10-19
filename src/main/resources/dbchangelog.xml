@@ -1,0 +1,28 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="michal" id="1">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="family_member"/>
+            </not>
+        </preConditions>
+        <createTable tableName="family_member">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="family_member_id_pk" />
+            </column>
+            <column name="family_id" type="varchar(255)" />
+            <column name="family_name" type="varchar(255)" />
+            <column name="given_name" type="varchar(255)" />
+            <column name="age" type="varchar(255)" />
+        </createTable>
+        <addAutoIncrement tableName="family_member" columnName="id" columnDataType="bigint" startWith="1" incrementBy="1" />
+        <createSequence sequenceName="hibernate_sequence" incrementBy="1" startValue="1" />
+    </changeSet>
+</databaseChangeLog>
